@@ -13,7 +13,7 @@ class Example(QWidget):
     def __init__(self):
         super().__init__()
         self.ll1 = 37.530887
-        self.ll2 = 55.70311
+        self.ll2 = 55.703118
         self.spn = 0.002
         self.rneed = True
         self.initUI()
@@ -54,14 +54,34 @@ class Example(QWidget):
         os.remove(self.map_file)
 
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key_PageUp:
-            if self.spn < 1:
+        if event.key() in (Qt.Key_A, Qt.Key_PageUp):
+            if self.spn < 5:
                 self.spn *= 2
                 self.rneed = True
-        elif event.key() == Qt.Key_PageDown:
+        elif event.key() in (Qt.Key_S, Qt.Key_PageUp):
             if self.spn > 0.001:
                 self.spn /= 2
                 self.rneed = True
+        elif event.key() == Qt.Key_Up:
+            if self.ll2 + self.spn / 2 < 90 - self.spn // 2:
+                self.ll2 += self.spn / 2
+                self.rneed = True
+        elif event.key() == Qt.Key_Down:
+            if self.ll2 - self.spn / 2 > -90 + self.spn // 2:
+                self.ll2 -= self.spn / 2
+                self.rneed = True
+        elif event.key() == Qt.Key_Right:
+            if self.ll1 + self.spn / 2 < 180:
+                self.ll1 += self.spn / 2
+            else:
+                self.ll1 = 179.99999
+            self.rneed = True
+        elif event.key() == Qt.Key_Left:
+            if self.ll1 - self.spn / 2 > -180:
+                self.ll1 -= self.spn / 2
+            else:
+                self.ll1 = -180
+            self.rneed = True
         self.repaint()
 
 
