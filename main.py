@@ -64,6 +64,10 @@ class Example(QWidget):
         self.label.move(130, 460)
         self.label.resize(300, 30)
 
+        self.adress = QLabel(self)
+        self.adress.move(10, 570)
+        self.adress.resize(590, 30)
+
         self.search = QLineEdit(self)
         self.search.move(130, 490)
         self.search.resize(300, 30)
@@ -81,6 +85,7 @@ class Example(QWidget):
     def reset_fnc(self):
         self.need_point = False
         self.rneed = True
+        self.adress.setText('')
 
     def paintEvent(self, event):
         try:
@@ -153,7 +158,7 @@ class Example(QWidget):
                     toponym_address = toponym["metaDataProperty"]["GeocoderMetaData"]["text"]
                     # Координаты центра топонима:
                     coords = toponym["Point"]["pos"]
-                    # print(f"{toponym_address} имеет координаты: {coords}")
+                    self.adress.setText(toponym_address)
                     self.ll1, self.ll2 = map(float, coords.split())
                     self.need_point = ','.join(coords.split())
                     self.rneed = True
