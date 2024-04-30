@@ -73,6 +73,15 @@ class Example(QWidget):
         self.search_btn.resize(300, 35)
         self.search_btn.clicked.connect(self.get_coords)
 
+        self.reset = QPushButton('Сброс\nпоискового\nрезультата', self)
+        self.reset.move(440, 460)
+        self.reset.resize(100, 100)
+        self.reset.clicked.connect(self.reset_fnc)
+
+    def reset_fnc(self):
+        self.need_point = False
+        self.rneed = True
+
     def paintEvent(self, event):
         try:
             if self.rneed:
