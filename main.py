@@ -54,11 +54,11 @@ class Example(QWidget):
         os.remove(self.map_file)
 
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key_A:
+        if event.key() == Qt.Key_PageUp:
             if self.spn < 1:
                 self.spn *= 2
                 self.rneed = True
-        elif event.key() == Qt.Key_S:
+        elif event.key() == Qt.Key_PageDown:
             if self.spn > 0.001:
                 self.spn /= 2
                 self.rneed = True
